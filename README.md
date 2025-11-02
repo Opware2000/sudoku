@@ -1,117 +1,120 @@
-# Sudoku Puzzle Generator
+# Générateur de Grilles de Sudoku
 
-![Sample Puzzle](./samples/sample_puzzle.png)
+![Exemple de Grille](./samples/sample_puzzle.png)
 
-This is a **Sudoku Puzzle Generator** written in Python, supporting the generation of Sudoku puzzles of varying difficulty levels (`easy`, `medium`, `hard`). The generator allows for customizable clue counts, optional puzzle symmetry, and the creation of professional-grade Sudoku puzzles. It can also generate PDFs of the puzzles and their solutions. The generator leverages **multiprocessing** to use all available CPU cores, making the puzzle generation process faster.
+Ceci est un **Générateur de Grilles de Sudoku** écrit en Python, supportant la génération de grilles de Sudoku de différents niveaux de difficulté (`facile`, `moyen`, `difficile`). Le générateur permet de personnaliser le nombre d'indices, d'utiliser une symétrie optionnelle, et de créer des grilles de Sudoku de qualité professionnelle. Il peut également générer des PDFs des grilles et de leurs solutions. Le générateur utilise le **multiprocessing** pour exploiter tous les cœurs CPU disponibles, rendant le processus de génération plus rapide.
 
-## Features
+## Fonctionnalités
 
-- **Customizable Difficulty**: Generate puzzles with `easy`, `medium`, or `hard` difficulty levels.
-- **Custom Clue Count**: Specify the number of clues for each puzzle (e.g., `hard:1:17` generates a hard puzzle with exactly 17 clues).
-- **Optional Symmetry**: Use the `--use-symmetry` flag to generate puzzles with symmetrical clue placement for a professional-grade look.
-- **Solution Generation**: Generate a separate PDF with solutions for the puzzles.
-- **Parallel Puzzle Generation**: Uses multiprocessing to generate puzzles in parallel, utilizing all available CPU cores for faster generation.
-- **PDF Output**: Outputs generated puzzles and solutions as PDFs.
+- **Difficulté Personnalisable** : Générez des grilles avec des niveaux de difficulté `facile`, `moyen` ou `difficile`.
+- **Nombre d'Indices Personnalisé** : Spécifiez le nombre d'indices pour chaque grille (par exemple, `difficile:1:17` génère une grille difficile avec exactement 17 indices).
+- **Symétrie Optionnelle** : Utilisez le drapeau `--use-symmetry` pour générer des grilles avec un placement symétrique des indices pour un aspect professionnel.
+- **Génération de Solutions** : Générez un PDF séparé avec les solutions des grilles.
+- **Génération Parallèle de Grilles** : Utilise le multiprocessing pour générer des grilles en parallèle, exploitant tous les cœurs CPU disponibles pour une génération plus rapide.
+- **Sortie PDF** : Produit les grilles générées et les solutions sous forme de PDFs.
 
 ## Installation
 
-To use this project, make sure you have Python 3.x installed and the necessary dependencies:
+Pour utiliser ce projet, assurez-vous d'avoir Python 3.x installé ainsi que les dépendances nécessaires :
 
-1. Clone this repository:
+1. Clonez ce dépôt :
+
    ```bash
    git clone https://github.com/alicommit-malp/sudoku
    cd sudoku
    ```
 
-2. Install dependencies:
+2. Installez les dépendances :
+
    ```bash
    pip install -r requirements.txt
    ```
 
-### Dependencies
+### Dépendances
 
-- `numpy`: Used for managing the Sudoku grid.
-- `fpdf`: For generating PDFs of the puzzles and solutions.
-- `argparse`: For parsing command-line arguments.
-- `multiprocessing`: To parallelize puzzle generation.
+- `numpy` : Utilisé pour gérer la grille de Sudoku.
+- `fpdf` : Pour générer les PDFs des grilles et des solutions.
+- `argparse` : Pour analyser les arguments de ligne de commande.
+- `multiprocessing` : Pour paralléliser la génération de grilles.
 
-## Usage
+## Utilisation
 
-You can run the Sudoku generator from the command line using the `python` command. Below are examples of different ways to run the generator.
+Vous pouvez exécuter le générateur de Sudoku depuis la ligne de commande en utilisant la commande `python`. Voici des exemples de différentes façons d'exécuter le générateur.
 
-### Basic Example
+### Exemple Basique
 
-Generate **10 easy puzzles** with **40 clues** and **5 medium puzzles** with **35 clues**, without symmetry:
-
-```bash
-python sudoku.py -config easy:10:40 -config medium:5:35 -output sudoku_puzzles.pdf
-```
-
-### Generating Hard Puzzles with Exactly 17 Clues
-
-Generate **5 hard puzzles** with **exactly 17 clues**, using symmetry and advanced difficulty checking, along with solutions:
+Générez **10 grilles faciles** avec **40 indices** et **5 grilles moyennes** avec **35 indices**, sans symétrie :
 
 ```bash
-python sudoku.py -config hard:5:17 -output sudoku_puzzles.pdf --use-symmetry --gen-answers
+python sudoku.py -config facile:10:40 -config moyen:5:35 -output sudoku_puzzles.pdf
 ```
 
-### Command Line Arguments
+### Génération de Grilles Difficiles avec Exactement 17 Indices
 
-- `-config`: Specify the difficulty level and the number of puzzles to generate in the format `difficulty:count:clues`. You can provide multiple configurations. 
-  - Example: `-config easy:10:40` generates 10 easy puzzles with 40 clues each.
-  - You can also omit the clue count, and a default will be used based on the difficulty.
-  
-- `-output`: Specify the name of the output PDF file (e.g., `sudoku_puzzles.pdf`).
-
-- `--gen-answers`: If this flag is provided, a second PDF with the solutions will be generated.
-
-- `--use-symmetry`: If this flag is provided, the puzzles will be generated with symmetrical clue placement for a professional-grade appearance.
-
-### Default Clue Counts
-
-If you do not provide a clue count for a puzzle, the following default values will be used based on difficulty:
-
-- `easy`: 40 clues
-- `medium`: 35 clues
-- `hard`: 30 clues
-
-## Examples
-
-### Generate 5 Hard Puzzles with 17 Clues Each:
+Générez **5 grilles difficiles** avec **exactement 17 indices**, en utilisant la symétrie et la vérification de difficulté avancée, ainsi que les solutions :
 
 ```bash
-python sudoku.py -config hard:5:17 -output hard_puzzles.pdf --gen-answers
+python sudoku.py -config difficile:5:17 -output sudoku_puzzles.pdf --use-symmetry --gen-answers
 ```
 
-This will generate 5 hard puzzles with exactly 17 clues each, and the solutions will be saved in `hard_puzzles_answers.pdf`.
+### Arguments de Ligne de Commande
 
-### Generate Mixed Difficulty Puzzles:
+- `-config` : Spécifiez le niveau de difficulté et le nombre de grilles à générer au format `difficulté:nombre:indices`. Vous pouvez fournir plusieurs configurations.
+  - Exemple : `-config facile:10:40` génère 10 grilles faciles avec 40 indices chacune.
+  - Vous pouvez également omettre le nombre d'indices, et une valeur par défaut sera utilisée en fonction de la difficulté.
+
+- `-output` : Spécifiez le nom du fichier PDF de sortie (par exemple, `sudoku_puzzles.pdf`).
+
+- `--gen-answers` : Si ce drapeau est fourni, un deuxième PDF avec les solutions sera généré.
+
+- `--use-symmetry` : Si ce drapeau est fourni, les grilles seront générées avec un placement symétrique des indices pour un aspect professionnel.
+
+### Nombres d'Indices par Défaut
+
+Si vous ne fournissez pas un nombre d'indices pour une grille, les valeurs par défaut suivantes seront utilisées en fonction de la difficulté :
+
+- `facile` : 40 indices
+- `moyen` : 35 indices
+- `difficile` : 30 indices
+
+## Exemples
+
+### Générer 5 Grilles Difficiles avec 17 Indices Chacune :
 
 ```bash
-python sudoku.py -config easy:10:40 -config medium:5:35 -config hard:3:30 -output mixed_puzzles.pdf
+python sudoku.py -config difficile:5:17 -output hard_puzzles.pdf --gen-answers
 ```
 
-This will generate:
-- 10 easy puzzles with 40 clues each.
-- 5 medium puzzles with 35 clues each.
-- 3 hard puzzles with 30 clues each.
+Cela générera 5 grilles difficiles avec exactement 17 indices chacune, et les solutions seront sauvegardées dans `hard_puzzles_answers.pdf`.
 
-### Enable Symmetry:
-
-To enable symmetrical clue placement in the puzzles, use the `--use-symmetry` flag:
+### Générer des Grilles de Difficultés Mixtes :
 
 ```bash
-python sudoku.py -config hard:5:17 -output symmetrical_hard_puzzles.pdf --use-symmetry
+python sudoku.py -config facile:10:40 -config moyen:5:35 -config difficile:3:30 -output mixed_puzzles.pdf
 ```
 
-### Generate Puzzles in Parallel:
+Cela générera :
 
-The generator automatically detects the number of CPU cores available and parallelizes the puzzle generation process. No additional flags are needed for multiprocessing.
+- 10 grilles faciles avec 40 indices chacune.
+- 5 grilles moyennes avec 35 indices chacune.
+- 3 grilles difficiles avec 30 indices chacune.
 
-## Contributing
+### Activer la Symétrie :
 
-Feel free to fork this repository and submit pull requests for improvements or bug fixes. If you have any issues or feature requests, please open an issue.
+Pour activer le placement symétrique des indices dans les grilles, utilisez le drapeau `--use-symmetry` :
 
-## License
+```bash
+python sudoku.py -config difficile:5:17 -output symmetrical_hard_puzzles.pdf --use-symmetry
+```
 
-This project is licensed under the MIT License.
+### Générer des Grilles en Parallèle :
+
+Le générateur détecte automatiquement le nombre de cœurs CPU disponibles et parallélise le processus de génération de grilles. Aucun drapeau supplémentaire n'est nécessaire pour le multiprocessing.
+
+## Contribution
+
+N'hésitez pas à forker ce dépôt et à soumettre des pull requests pour des améliorations ou des corrections de bugs. Si vous avez des problèmes ou des demandes de fonctionnalités, veuillez ouvrir une issue.
+
+## Licence
+
+Ce projet est sous licence MIT.
